@@ -1,7 +1,16 @@
 
 
+import sys
+
 from langgraph.types import Command
-from graph import graph
+
+# 要和 graph.py 里的包导入保持一致，所以从 lg_cource 目录跑：
+#     python -m myrepo.assistant.main
+from myrepo.assistant.graph import graph
+
+# node.py 里改的是 stdout；stdin 不改的话，这里 input() 读到的中文会解码成乱码
+if hasattr(sys.stdin, "reconfigure"):
+    sys.stdin.reconfigure(encoding="utf-8")
 
 #配一个固定id
 config = {
